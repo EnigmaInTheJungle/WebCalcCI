@@ -1,11 +1,12 @@
 ﻿using JSTest.ScriptLibraries;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.IO;
 
 namespace WebCalc
 {
-    [TestClass]
+    [TestFixture]
     public class UnitLogicTestJS
     {
         static private readonly JSTest.TestScript script = new JSTest.TestScript();
@@ -18,22 +19,32 @@ namespace WebCalc
             return result;
         }
 
-        [ClassInitialize]
-        static public void CommonJavaScriptTests(TestContext tc)
+        [SetUp]
+        static public void CommonJavaScriptTests()
         {
-            script.AppendFile(GetApplicationPath("CalcJS.html"));
+            //script.AppendFile(GetApplicationPath("CalcJS.html"));
             script.AppendFile(GetApplicationPath("calculate.js"));
             script.AppendBlock(new JsAssertLibrary());
         }
 
-        [DataTestMethod]
-        [DataRow(1, 2, "+", 3)]
-        [DataRow(2, 3, "-", -1)]
-        [DataRow(4, 5, "*", 20)]
-        [DataRow(8, 4, "/", 2)]
-        public void TestMethod1(int a, int b, string op, int res)
+        [Test]
+        [TestCase(1, 2, "+", 3)]
+        [TestCase(2, 3, "-", -1)]
+        [TestCase(4, 5, "*", 20)]
+        [TestCase(8, 4, "/", 2)]
+        public void TestCalc(int a, int b, string op, int res)
         {
             script.RunTest($"assert.equal({res}, calculate({a}, {b}, '{op}'));");
+        }
+
+        [Test]
+        [TestCase(1, 2, "+", 3)]
+        [TestCase(2, 3, "-", -1)]
+        [TestCase(4, 5, "*", 20)]
+        [TestCase(8, 4, "/", 2)]
+        public void TestWebCalc(int a, int b, string op, int res)
+        {
+            script.RunTest($"assert.equal({res}, calculateWeb({a}, {b}, '{op}'));");
         }
     }
 }

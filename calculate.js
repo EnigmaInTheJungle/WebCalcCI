@@ -22,7 +22,24 @@ function fOper(but)
     }
 }
 
-function calculate(a, b, op) 
+function calculate(x,y,op)
+{
+	var result = 0;
+
+	if(op == '+')
+		result = x + y;
+	else if(op == '-')
+		result = x - y;
+	else if(op == '*')
+		result = x * y;
+	else if(op == '/')
+		result = x / y;		
+		
+	return result;
+}
+
+
+function calculateWeb(a, b, op) 
 {
 	if(op == '+')
 		op = '%2b';
