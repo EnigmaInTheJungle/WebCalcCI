@@ -18,7 +18,7 @@ function fOper(but)
     else
     {
         y = form.resField.value;
-        form.resField.value = calculate(x, y, op);
+        form.resField.value = calculateWeb(x, y, op);
     }
 }
 
