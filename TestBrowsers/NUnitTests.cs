@@ -9,6 +9,8 @@ using NUnit.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TestBrowsers
 {
@@ -109,12 +111,16 @@ namespace TestBrowsers
         [TestCase("but7", "but0", "butDiv", "0")]
         public void TestRealJob(string x, string y, string op, string res)
         {
-            obj.FindElement(x).Click();
-            obj.FindElement(op).Click();
-            obj.FindElement(y).Click();
-            obj.FindElement("butEqual").Click();
-            string calc = obj.FindElement("resField").GetAttribute("value");
-            NUnit.Framework.Assert.AreEqual(res, calc);
+            Task.Run(() =>
+            {
+                obj.FindElement(x).Click();
+                obj.FindElement(op).Click();
+                obj.FindElement(y).Click();
+                obj.FindElement("butEqual").Click();
+                string calc = obj.FindElement("resField").GetAttribute("value");
+                return calc;
+            }).ContinueWith((e) => { NUnit.Framework.Assert.AreEqual(res, e); });
+
         }
 
     }
