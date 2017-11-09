@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace TestBrowsers
 {
-    [TestFixture(typeof(EdgeDriver))]
+    [TestFixture(typeof(ChromeDriver))]
     public class NUnitTets<TPage> where TPage : IWebDriver, new()
     {
         POM obj;
