@@ -71,24 +71,6 @@ namespace TestBrowsers
         }
 
         [Test]
-        [TestCase("but1", "1")]
-        [TestCase("but2", "2")]
-        [TestCase("but3", "3")]
-        [TestCase("but4", "4")]
-        [TestCase("but5", "5")]
-        [TestCase("but6", "6")]
-        [TestCase("but7", "7")]
-        [TestCase("but8", "8")]
-        [TestCase("but9", "9")]
-        [TestCase("but0", "0")]
-        public void TestSimpleCheck(string elementId, string res)
-        {
-            obj.FindElement(elementId).Click();
-            string num = obj.FindElement("resField").GetAttribute("value");
-            NUnit.Framework.Assert.AreEqual(res, num);
-        }
-
-        [Test]
         [TestCase(new string[] { "but1", "but2", "but3" }, "123")]
         [TestCase(new string[] { "but4", "but5", "but6" }, "456")]
         [TestCase(new string[] { "but7", "but8", "but9" }, "789")]
