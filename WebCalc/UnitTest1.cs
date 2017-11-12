@@ -36,15 +36,5 @@ namespace WebCalc
         {
             script.RunTest($"assert.equal({res}, calculate({a}, {b}, '{op}'));");
         }
-
-        [Test]
-        [TestCase(1, 2, "+", 3)]
-        [TestCase(2, 3, "-", -1)]
-        [TestCase(4, 5, "*", 20)]
-        [TestCase(8, 4, "/", 2)]
-        public void TestWebCalc(int a, int b, string op, int res)
-        {
-            script.RunTest($"assert.equal({res}, calculateWeb({a}, {b}, '{op}'));");
-        }
     }
 }
